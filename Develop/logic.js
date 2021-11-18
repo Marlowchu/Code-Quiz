@@ -6,6 +6,9 @@ var startBtn = document.querySelector("#start");
 var questionEl = document.querySelector(".question");
 var answersEl = document.querySelector(".answers");
 
+var mainEl = document.querySelector("#main");
+var h2El = document.querySelector("#h2");
+
 var instructionEl = document.querySelector("#instruction");
 
 
@@ -35,6 +38,66 @@ startBtn.addEventListener("click", function () {
   instructionEl.remove()
 
 });
+
+
+
+function question1 () {
+
+      
+  // questions.forEach(function(item, index, array){
+
+  for (i = 0; i < questions.length; i++) {
+   
+    
+  
+    questionEl.textContent = questions [qnum];
+
+    // question1Ans.forEach(element => answersEl.append (element));
+
+
+      if (qnum == 0) {
+        
+      
+  answersEl.innerHTML = "<button id = A>cat</button> <br> <button id = B>dog</button> <br> <button id = C>frog</button> <br> <button id = D>fish</button>";
+
+
+    (answersEl.addEventListener("click", answerfunc))
+
+      }
+
+      if (qnum == 1) {
+        
+      
+        answersEl.innerHTML = "<button id = A>1</button> <br> <button id = B>1</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
+    
+    
+          (answersEl.addEventListener("click", answerfunc))
+    
+            }
+
+          if (qnum == 2) {
+        
+      
+              answersEl.innerHTML = "<button id = A>1</button> <br> <button id = B>2</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
+          
+          
+                (answersEl.addEventListener("click", answerfunc))
+          
+                  }
+
+                  if (qnum == 3) {
+        
+      
+                    answersEl.innerHTML = "<button id = A>3</button> <br> <button id = B>3</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
+                
+                
+                      (answersEl.addEventListener("click", answerfunc))
+                
+                        }
+   
+  }
+    
+  }
 
 
 // start timer
@@ -86,6 +149,11 @@ console.log (question2Ans[qnum])
       questionEl.textContent = "";
 
       answersEl.innerHTML = "";
+
+      timerEl.textContent = "";
+      h2El.textContent = ""
+
+      done ()
       // call score page/ funtion
 
      }
@@ -93,6 +161,47 @@ console.log (question2Ans[qnum])
 }
 
 
+function done () {
+
+  mainEl.textContent = "ALL DONE!";
+
+  h2El.textContent = "Your score is " + timerCount;
+
+
+  var pEl = document.createElement("P");
+  var t = document.createTextNode("Enter name: ");
+  pEl.appendChild(t);
+  document.body.appendChild(pEl);
+
+  var inpEl = document.createElement("input");
+inpEl.setAttribute("type", "text");
+inpEl.setAttribute("id", "input");
+inpEl.textContent = ""
+document.body.appendChild(inpEl);
+
+var bEl = document.createElement("input");
+bEl.setAttribute("type", "button");
+bEl.setAttribute("value", "Submit");
+document.body.appendChild(bEl);
+
+
+bEl.addEventListener("click", function(){
+
+  var grab = inpEl.value;
+
+  // var input = document.getElementById(input).value;
+    result = grab+" " + timerCount;
+    // window.alert (grab+ ": " + timerCount);
+    // window.open this.scrollHe;
+
+    // location.assign("Develop/score.html");
+});
+
+
+
+
+}
+  
 
 
 
@@ -125,64 +234,7 @@ console.log (question2Ans[qnum])
     //display on the page
 
 
-    function question1 () {
 
-      
-    // questions.forEach(function(item, index, array){
-
-    for (i = 0; i < questions.length; i++) {
-     
-      
-    
-      questionEl.textContent = questions [qnum];
-
-      // question1Ans.forEach(element => answersEl.append (element));
-
-
-        if (qnum == 0) {
-          
-        
-    answersEl.innerHTML = "<button id = A>cat</button> <br> <button id = B>dog</button> <br> <button id = C>frog</button> <br> <button id = D>fish</button>";
-
-
-      (answersEl.addEventListener("click", answerfunc))
-
-        }
-
-        if (qnum == 1) {
-          
-        
-          answersEl.innerHTML = "<button id = A>1</button> <br> <button id = B>1</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
-      
-      
-            (answersEl.addEventListener("click", answerfunc))
-      
-              }
-
-            if (qnum == 2) {
-          
-        
-                answersEl.innerHTML = "<button id = A>1</button> <br> <button id = B>2</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
-            
-            
-                  (answersEl.addEventListener("click", answerfunc))
-            
-                    }
-
-                    if (qnum == 3) {
-          
-        
-                      answersEl.innerHTML = "<button id = A>3</button> <br> <button id = B>3</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
-                  
-                  
-                        (answersEl.addEventListener("click", answerfunc))
-                  
-                          }
-     
-    }
-      
-    }
-  
       // question 1
   // questionEl.textContent = questions[0];
   // answersEl.innerHTML = "<button id = A>A</button> <br> <button id = B>B</button> <br> <button id = C>C</button> <br> <button id = D>D</button>";
