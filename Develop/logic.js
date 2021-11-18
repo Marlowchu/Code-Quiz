@@ -3,92 +3,94 @@
 var timerEl = document.querySelector("#counter");
 var startBtn = document.querySelector("#start");
 
-var questionEl = document.querySelector("#question");
-var answersEl = document.querySelector("#answers");
+var questionEl = document.querySelector(".question");
+var answersEl = document.querySelector(".answers");
 
 var instructionEl = document.querySelector("#instruction");
 
 
 var result = ""
 var timerCount = ""
+var correct = ""
+var lose = ""
+
+var questions = ["question 1", "question 2", "question 3", "question 4"];
+// var question1Ans = ["#A", "#B","#C", "#D"]
+var question2Ans = [ "fish", "B", "C", "D" ];
+// var question3Ans = ["A", "B", "C", "D"]
+var question1Ans = ["<button id = A>item</button> <br>", "<button id = B>item</button> <br>", "<button id = C>item</button> <br>", "<button id = D>item</button>"]
+
+var qnum = 0
+
+// var D = document.querySelector("#D")
 
 
-
-
-
-
+// when start button is pressed
 startBtn.addEventListener("click", function () {
   
   timerCount = 51
   timerfunc()
-  questionfunc()
+  question1()
   startBtn.remove()
   instructionEl.remove()
 
 });
 
 
-function questionfunc() {
-
-questionEl.append ("Displaying question");
-answersEl.innerHTML = "<button>A</button> <br> <button>B</button> <br> <button>C</button> <br> <button>D</button>";
-
-answersEl.addEventListener("click", function () {
- console.log("click which one?")
-})
-}
-
-
-
+// start timer
 function timerfunc () {
   
   timer = setInterval (function() {
     timerCount--;
 
-if (timerCount === 0) {
+if (timerCount <= 0) {
+
+  window.alert("You lose")
   clearInterval(timer);
 }
 
     timerEl.textContent = timerCount;
+  
   }
 
 , 1000
   )
 }
 
-  
+// CHECK answers
+function answerfunc (event) {
 
+ if (event.target != answersEl) {
+  // console.log ("clicked button")
+  // console.log (answersEl)
+ 
+console.log (event.target.textContent)
+console.log (question2Ans[qnum])
 
+  if (event.target.textContent == question2Ans[qnum]) {
+  console.log ("CORRECT")
+  qnum ++
+  question1()
+   }
 
+   else{
+     timerCount = timerCount -7;
+      console.log ("INCORRECT")
+       qnum ++
+       question1()
+     }
+     if (qnum ==questions.length) {
+      clearInterval(timer);
+      console.log(timerCount)
 
+      questionEl.textContent = "";
 
+      answersEl.innerHTML = "";
+      // call score page/ funtion
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     }
+}
+}
 
 
 
@@ -122,6 +124,77 @@ if (timerCount === 0) {
     //event listener for each choice
     //display on the page
 
+
+    function question1 () {
+
+      
+    // questions.forEach(function(item, index, array){
+
+    for (i = 0; i < questions.length; i++) {
+     
+      
+    
+      questionEl.textContent = questions [qnum];
+
+      // question1Ans.forEach(element => answersEl.append (element));
+
+
+        if (qnum == 0) {
+          
+        
+    answersEl.innerHTML = "<button id = A>cat</button> <br> <button id = B>dog</button> <br> <button id = C>frog</button> <br> <button id = D>fish</button>";
+
+
+      (answersEl.addEventListener("click", answerfunc))
+
+        }
+
+        if (qnum == 1) {
+          
+        
+          answersEl.innerHTML = "<button id = A>1</button> <br> <button id = B>1</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
+      
+      
+            (answersEl.addEventListener("click", answerfunc))
+      
+              }
+
+            if (qnum == 2) {
+          
+        
+                answersEl.innerHTML = "<button id = A>1</button> <br> <button id = B>2</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
+            
+            
+                  (answersEl.addEventListener("click", answerfunc))
+            
+                    }
+
+                    if (qnum == 3) {
+          
+        
+                      answersEl.innerHTML = "<button id = A>3</button> <br> <button id = B>3</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
+                  
+                  
+                        (answersEl.addEventListener("click", answerfunc))
+                  
+                          }
+     
+    }
+      
+    }
+  
+      // question 1
+  // questionEl.textContent = questions[0];
+  // answersEl.innerHTML = "<button id = A>A</button> <br> <button id = B>B</button> <br> <button id = C>C</button> <br> <button id = D>D</button>";
+  
+  // var D = document.querySelector("#D");
+  
+  //  (answersEl.addEventListener("click", answerfunc)) 
+
+
+
+
+
 //function for the questionclick 
   //did the user guess right or wrong
   //wrong guess decreases time
@@ -154,3 +227,4 @@ if (timerCount === 0) {
 
 
 // user clicks button to start quiz
+
