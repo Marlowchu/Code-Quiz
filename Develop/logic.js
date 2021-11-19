@@ -15,24 +15,23 @@ var instructionEl = document.querySelector("#instruction");
 
 var result = [];
 var timerCount = ""
-var correct = ""
-var lose = ""
+var correct = 0
 
-var questions = ["question 1", "NAME", "question 3", "question 4"];
-// var question1Ans = ["#A", "#B","#C", "#D"]
-var question2Ans = [ "fish", "B", "C", "D" ];
-// var question3Ans = ["A", "B", "C", "D"]
-var question1Ans = ["<button id = A>item</button> <br>", "<button id = B>item</button> <br>", "<button id = C>item</button> <br>", "<button id = D>item</button>"]
+
+var questions = ["Commonly used data types DO NOT include:", "The condition in an if / else statement is enclosed within ____. ", "Arrays in JavaScript can be used to store ____.", "String values must be enclosed within ____ when being assigned to variables."," A very useful tool used during development and debugging for printing content to the debugger is: "];
+
+var question2Ans = [ "alerts", "parentheses", "all of the above", "quotes", "console.log" ];
+
 
 var qnum = 0
 
-// var D = document.querySelector("#D")
+
 
 
 // when start button is pressed
 startBtn.addEventListener("click", function () {
   
-  timerCount = 51
+  timerCount = 76
   timerfunc()
   question1()
   startBtn.remove()
@@ -51,22 +50,15 @@ scoreBtn.addEventListener("click", function () {
 
 function question1 () {
 
-      
-  // questions.forEach(function(item, index, array){
-
   for (i = 0; i < questions.length; i++) {
    
-    
-  
     questionEl.textContent = questions [qnum];
 
-    // question1Ans.forEach(element => answersEl.append (element));
-
-
+  
       if (qnum == 0) {
         
       
-  answersEl.innerHTML = "<button id = A>cat</button> <br> <button id = B>dog</button> <br> <button id = C>frog</button> <br> <button id = D>fish</button>";
+  answersEl.innerHTML = "<button id = A>strings</button> <br> <button id = B>booleans</button> <br> <button id = C>alerts</button> <br> <button id = D>numbers</button>";
 
 
     (answersEl.addEventListener("click", answerfunc))
@@ -76,7 +68,7 @@ function question1 () {
       if (qnum == 1) {
         
       
-        answersEl.innerHTML = "<button id = A>1</button> <br> <button id = B>1</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
+        answersEl.innerHTML = "<button id = A>quotes</button> <br> <button id = B>curly brackets</button> <br> <button id = C>parentheses</button> <br> <button id = D>square brackets</button>";
     
     
           (answersEl.addEventListener("click", answerfunc))
@@ -86,7 +78,7 @@ function question1 () {
           if (qnum == 2) {
         
       
-              answersEl.innerHTML = "<button id = A>1</button> <br> <button id = B>2</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
+              answersEl.innerHTML = "<button id = A>numbers and strings</button> <br> <button id = B>other arrays</button> <br> <button id = C>booleans</button> <br> <button id = D>all of the above</button>";
           
           
                 (answersEl.addEventListener("click", answerfunc))
@@ -96,12 +88,22 @@ function question1 () {
                   if (qnum == 3) {
         
       
-                    answersEl.innerHTML = "<button id = A>3</button> <br> <button id = B>3</button> <br> <button id = C>3</button> <br> <button id = D>4</button>";
+                    answersEl.innerHTML = "<button id = A>commas</button> <br> <button id = B>curly brackets</button> <br> <button id = C>quotes</button> <br> <button id = D>parentheses</button>";
                 
                 
                       (answersEl.addEventListener("click", answerfunc))
                 
                         }
+
+                        if (qnum == 4) {
+        
+      
+                          answersEl.innerHTML = "<button id = A>JavaScript</button> <br> <button id = B>terminal / bash</button> <br> <button id = C>for loops</button> <br> <button id = D>console.log</button>";
+                      
+                      
+                            (answersEl.addEventListener("click", answerfunc))
+                      
+                              }
    
   }
     
@@ -116,8 +118,13 @@ function timerfunc () {
 
 if (timerCount <= 0) {
 
-  window.alert("You lose")
   clearInterval(timer);
+  questionEl.textContent = "";
+
+  answersEl.innerHTML = "";
+
+  timerEl.textContent = "";
+  done ();
 }
 
     timerEl.textContent = timerCount;
@@ -132,14 +139,14 @@ if (timerCount <= 0) {
 function answerfunc (event) {
 
  if (event.target != answersEl) {
-  // console.log ("clicked button")
-  // console.log (answersEl)
+ 
  
 console.log (event.target.textContent)
 console.log (question2Ans[qnum])
 
   if (event.target.textContent == question2Ans[qnum]) {
   console.log ("CORRECT")
+  correct ++
   qnum ++
   question1()
    }
@@ -162,7 +169,6 @@ console.log (question2Ans[qnum])
       h2El.textContent = ""
 
       done ()
-      // call score page/ funtion
 
      }
 }
@@ -173,7 +179,7 @@ function done () {
 
   mainEl.textContent = "ALL DONE!";
 
-  h2El.textContent = "Your score is " + timerCount;
+  h2El.textContent = "Your score is " + timerCount + ". You got " + correct + "/" + qnum + " correct";
 
 
   var pEl = document.createElement("P");
@@ -183,8 +189,7 @@ function done () {
 
   var inpEl = document.createElement("input");
 inpEl.setAttribute("type", "text");
-// inpEl.setAttribute("id", "input");
-// inpEl.textContent = ""
+
 document.body.appendChild(inpEl);
 
 var bEl = document.createElement("input");
@@ -195,17 +200,9 @@ document.body.appendChild(bEl);
 
 bEl.addEventListener("click", function(){
 
-
-  // localStorage.clear()
-
   var inputText = inpEl.value;
  
   var save = inputText + " " + timerCount
-  
-
-  // var 
-  // var input = document.getElementById(input).value;
-    // var grab = inputText+" " + timerCount;
 
   result = localStorage.getItem("scores");
 
@@ -232,22 +229,6 @@ bEl.addEventListener("click", function(){
 }
   
 
-// function saveScore (result) {
-  
-//   localStorage.setItem("player", result);
-  
-// }
-
-
-
-
-
-
-
-
-
-
-
 
 // variables to keep track of quiz state
 
@@ -265,20 +246,6 @@ bEl.addEventListener("click", function(){
     //create new button for each choice
     //event listener for each choice
     //display on the page
-
-
-
-      // question 1
-  // questionEl.textContent = questions[0];
-  // answersEl.innerHTML = "<button id = A>A</button> <br> <button id = B>B</button> <br> <button id = C>C</button> <br> <button id = D>D</button>";
-  
-  // var D = document.querySelector("#D");
-  
-  //  (answersEl.addEventListener("click", answerfunc)) 
-
-
-
-
 
 //function for the questionclick 
   //did the user guess right or wrong
@@ -304,9 +271,6 @@ bEl.addEventListener("click", function(){
   //format new score object for current user 
   //save to localstorage
   //redirect to next page
-
-
-
 
 // user clicks button to submit initials
 

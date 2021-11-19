@@ -21,37 +21,6 @@ function display (item) {
     disEl.appendChild(li);
 }
 }
-// ns = JSON.parse (ns)
-
-
-
-//  window.alert ( "hey" );
-
-//  disEl.textContent = ns;
-
-
-    // ns.forEach(element => {
-    //     disEl.textContent
-    // });
-
-
-
-
-//  // Render a new li for each todo
-//  for (var i = 0; i < ns.length; i++) {
-//     var todo = todos[i];
-
-//     var li = document.createElement("li");
-//     li.textContent = todo;
-//     li.setAttribute("data-index", i);
-
-//     var button = document.createElement("button");
-//     button.textContent = "Complete ✔️";
-
-//     li.appendChild(button);
-//     todoList.appendChild(li);
-//   }
-
 
 
 backEl.addEventListener("click", function(){
