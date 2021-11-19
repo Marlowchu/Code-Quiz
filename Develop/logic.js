@@ -2,6 +2,7 @@
 
 var timerEl = document.querySelector("#counter");
 var startBtn = document.querySelector("#start");
+var scoreBtn = document.querySelector("#score");
 
 var questionEl = document.querySelector(".question");
 var answersEl = document.querySelector(".answers");
@@ -12,12 +13,12 @@ var h2El = document.querySelector("#h2");
 var instructionEl = document.querySelector("#instruction");
 
 
-var result = ""
+var result = [];
 var timerCount = ""
 var correct = ""
 var lose = ""
 
-var questions = ["question 1", "question 2", "question 3", "question 4"];
+var questions = ["question 1", "NAME", "question 3", "question 4"];
 // var question1Ans = ["#A", "#B","#C", "#D"]
 var question2Ans = [ "fish", "B", "C", "D" ];
 // var question3Ans = ["A", "B", "C", "D"]
@@ -35,10 +36,17 @@ startBtn.addEventListener("click", function () {
   timerfunc()
   question1()
   startBtn.remove()
+  scoreBtn.remove()
   instructionEl.remove()
 
 });
 
+
+scoreBtn.addEventListener("click", function () {
+  
+  location.assign("./score.html");
+
+});
 
 
 function question1 () {
@@ -175,8 +183,8 @@ function done () {
 
   var inpEl = document.createElement("input");
 inpEl.setAttribute("type", "text");
-inpEl.setAttribute("id", "input");
-inpEl.textContent = ""
+// inpEl.setAttribute("id", "input");
+// inpEl.textContent = ""
 document.body.appendChild(inpEl);
 
 var bEl = document.createElement("input");
@@ -187,14 +195,35 @@ document.body.appendChild(bEl);
 
 bEl.addEventListener("click", function(){
 
-  var grab = inpEl.value;
 
+  // localStorage.clear()
+
+  var inputText = inpEl.value;
+ 
+  var save = inputText + " " + timerCount
+  
+
+  // var 
   // var input = document.getElementById(input).value;
-    result = grab+" " + timerCount;
-    // window.alert (grab+ ": " + timerCount);
-    // window.open this.scrollHe;
+    // var grab = inputText+" " + timerCount;
 
-    // location.assign("Develop/score.html");
+  result = localStorage.getItem("scores");
+
+  result = JSON.parse(result);
+
+  if (result === null) {
+    result = []
+  }
+
+    result.push(save);
+
+    var updateScore = JSON.stringify (result);
+ 
+  localStorage.setItem("scores", updateScore);
+
+  
+    location.assign("./score.html");
+   
 });
 
 
@@ -203,7 +232,11 @@ bEl.addEventListener("click", function(){
 }
   
 
-
+// function saveScore (result) {
+  
+//   localStorage.setItem("player", result);
+  
+// }
 
 
 
