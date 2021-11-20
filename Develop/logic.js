@@ -1,5 +1,5 @@
 
-
+// variables
 var timerEl = document.querySelector("#counter");
 var startBtn = document.querySelector("#start");
 var scoreBtn = document.querySelector("#score");
@@ -12,23 +12,19 @@ var h2El = document.querySelector("#h2");
 
 var instructionEl = document.querySelector("#instruction");
 
-
 var result = [];
 var timerCount = ""
 var correct = 0
 
-
+// questions
 var questions = ["Commonly used data types DO NOT include:", "The condition in an if / else statement is enclosed within ____. ", "Arrays in JavaScript can be used to store ____.", "String values must be enclosed within ____ when being assigned to variables."," A very useful tool used during development and debugging for printing content to the debugger is: "];
-
+// answers
 var question2Ans = [ "alerts", "parentheses", "all of the above", "quotes", "console.log" ];
 
-
+// question number var
 var qnum = 0
 
-
-
-
-// when start button is pressed
+// when start button is pressed set timer, start timer, ask questions
 startBtn.addEventListener("click", function () {
   
   timerCount = 76
@@ -40,82 +36,71 @@ startBtn.addEventListener("click", function () {
 
 });
 
-
+// if score button is pressed go to score page
 scoreBtn.addEventListener("click", function () {
   
   location.assign("./score.html");
 
 });
 
-
+// function to ask questions
 function question1 () {
-
+// iterate through questions and display it 
   for (i = 0; i < questions.length; i++) {
    
     questionEl.textContent = questions [qnum];
 
-  
+  // question 1 choices
       if (qnum == 0) {
         
-      
+  // display choices on button
   answersEl.innerHTML = "<button id = A>strings</button> <br> <button id = B>booleans</button> <br> <button id = C>alerts</button> <br> <button id = D>numbers</button>";
 
-
+  // check to see what answer was choosen 
     (answersEl.addEventListener("click", answerfunc))
 
       }
-
-      if (qnum == 1) {
+ // question 2 choices
+    if (qnum == 1) {
         
-      
-        answersEl.innerHTML = "<button id = A>quotes</button> <br> <button id = B>curly brackets</button> <br> <button id = C>parentheses</button> <br> <button id = D>square brackets</button>";
+     answersEl.innerHTML = "<button id = A>quotes</button> <br> <button id = B>curly brackets</button> <br> <button id = C>parentheses</button> <br> <button id = D>square brackets</button>";
     
+      (answersEl.addEventListener("click", answerfunc))
     
-          (answersEl.addEventListener("click", answerfunc))
-    
-            }
-
+         }
+ // question 3 choices
           if (qnum == 2) {
         
-      
               answersEl.innerHTML = "<button id = A>numbers and strings</button> <br> <button id = B>other arrays</button> <br> <button id = C>booleans</button> <br> <button id = D>all of the above</button>";
-          
           
                 (answersEl.addEventListener("click", answerfunc))
           
                   }
-
+ // question 4 choices
                   if (qnum == 3) {
         
-      
                     answersEl.innerHTML = "<button id = A>commas</button> <br> <button id = B>curly brackets</button> <br> <button id = C>quotes</button> <br> <button id = D>parentheses</button>";
-                
                 
                       (answersEl.addEventListener("click", answerfunc))
                 
                         }
-
+ // question 5 choices
                         if (qnum == 4) {
         
-      
                           answersEl.innerHTML = "<button id = A>JavaScript</button> <br> <button id = B>terminal / bash</button> <br> <button id = C>for loops</button> <br> <button id = D>console.log</button>";
-                      
                       
                             (answersEl.addEventListener("click", answerfunc))
                       
                               }
-   
   }
-    
   }
 
-
-// start timer
+// start timer functiion
 function timerfunc () {
-  
+  // set timer and decrease it by one.
   timer = setInterval (function() {
     timerCount--;
-
+// if timer is less than 0 stop count down and remove question and answers
 if (timerCount <= 0) {
 
   clearInterval(timer);
@@ -126,47 +111,45 @@ if (timerCount <= 0) {
   timerEl.textContent = "";
   done ();
 }
-
+// display count down
     timerEl.textContent = timerCount;
-  
   }
-
 , 1000
   )
 }
 
 // CHECK answers
 function answerfunc (event) {
-
+// make sure a button was pressed and not just a click in the container
  if (event.target != answersEl) {
  
- 
-console.log (event.target.textContent)
-console.log (question2Ans[qnum])
-
+// check if button clicked matches the correct answer in variable. call next question
   if (event.target.textContent == question2Ans[qnum]) {
   console.log ("CORRECT")
   correct ++
   qnum ++
   question1()
    }
-
+// if it doesn't match then it is incorrect. call next question.
    else{
      timerCount = timerCount -7;
       console.log ("INCORRECT")
        qnum ++
        question1()
      }
-     if (qnum ==questions.length) {
-      clearInterval(timer);
-      console.log(timerCount)
 
+// when you reach the last question stop timer and remove questions and answers
+     if (qnum == questions.length) {
+
+      clearInterval(timer);
+     
       questionEl.textContent = "";
 
       answersEl.innerHTML = "";
 
       timerEl.textContent = "";
-      h2El.textContent = ""
+
+      h2El.textContent = "";
 
       done ()
 
@@ -174,57 +157,54 @@ console.log (question2Ans[qnum])
 }
 }
 
-
+// Function when all questions are answered or time runs out.
 function done () {
 
   mainEl.textContent = "ALL DONE!";
-
+// display your score and the number of questions you answered correct
   h2El.textContent = "Your score is " + timerCount + ". You got " + correct + "/" + qnum + " correct";
 
-
+// create p tag and text to be displayed in it
   var pEl = document.createElement("P");
   var t = document.createTextNode("Enter name: ");
   pEl.appendChild(t);
   document.body.appendChild(pEl);
-
+// create input box
   var inpEl = document.createElement("input");
 inpEl.setAttribute("type", "text");
 
 document.body.appendChild(inpEl);
-
+// create submit button
 var bEl = document.createElement("input");
 bEl.setAttribute("type", "button");
 bEl.setAttribute("value", "Submit");
 document.body.appendChild(bEl);
 
-
+// submit button listener
 bEl.addEventListener("click", function(){
-
+// grab user input and join it with the score
   var inputText = inpEl.value;
  
   var save = inputText + " " + timerCount
-
+// grab scores in local storage
   result = localStorage.getItem("scores");
 
   result = JSON.parse(result);
-
+// if noting is in local storage create empty array so you don't get error
   if (result === null) {
     result = []
   }
-
+// add user input plus score to array
     result.push(save);
-
+// transform array
     var updateScore = JSON.stringify (result);
- 
+//  add array to local storage
   localStorage.setItem("scores", updateScore);
 
-  
+  // pull up scores page
     location.assign("./score.html");
    
 });
-
-
-
 
 }
   
